@@ -43,7 +43,7 @@ Response:
 
 ```json
 {
-  "type": "todoToggled",
+  "type": "togleTodo",
   "id": "c5cdc877-19da-48eb-99f3-983cde01379f"
 }
 ```
@@ -83,7 +83,7 @@ When something goes wrong after posting a new action, the API returns errors and
 
 ```bash
 $ curl localhost:3000/actions -X POST \
-  --data '{"type": "toggleTodo" }' \
+  --data '{"type": "addTodo" }' \
   -H 'Content-Type:application/json'
 ```
 
