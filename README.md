@@ -43,7 +43,7 @@ Response:
 
 ```json
 {
-  "type": "togleTodo",
+  "type": "toggleTodo",
   "id": "c5cdc877-19da-48eb-99f3-983cde01379f"
 }
 ```
