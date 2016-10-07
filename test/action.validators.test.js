@@ -22,7 +22,7 @@ describe("actionValidators{}", () => {
       const action = { type: "addTodo", text: "walk the dog" };
       const result = addTodo(state, action);
 
-      expect(result).to.deep.equal(
+      expect(result).deep.equal(
         Success({
           type: "addTodo",
           text: "walk the dog"
@@ -34,7 +34,7 @@ describe("actionValidators{}", () => {
       const action = { type: "addTodo" };
       const result = addTodo(state, action);
 
-      expect(result).to.deep.equal(
+      expect(result).deep.equal(
         Failure(["Todo must have a text description."])
       );
     });
@@ -43,7 +43,7 @@ describe("actionValidators{}", () => {
       const action = { type: "addTodo", text: "" };
       const result = addTodo(state, action);
 
-      expect(result).to.deep.equal(
+      expect(result).deep.equal(
         Failure(["Todo text must not be empty."])
       );
     });
@@ -52,7 +52,7 @@ describe("actionValidators{}", () => {
       const action = { type: "addTodo", text: "wash dishes" };
       const result = addTodo(state, action);
 
-      expect(result).to.deep.equal(
+      expect(result).deep.equal(
         Failure(["Todo text must be unique."])
       );
     });
@@ -63,7 +63,7 @@ describe("actionValidators{}", () => {
       const action = { type: "toggleTodo", id: "8c046a2d-b057-4f97-ba50-d7cacd04637e" };
       const result = toggleTodo(state, action);
 
-      expect(result).to.deep.equal(
+      expect(result).deep.equal(
         Success({
           type: "toggleTodo",
           id: "8c046a2d-b057-4f97-ba50-d7cacd04637e"
@@ -75,7 +75,7 @@ describe("actionValidators{}", () => {
       const action = { type: "toggleTodo", id: "666" };
       const result = toggleTodo(state, action);
 
-      expect(result).to.deep.equal(
+      expect(result).deep.equal(
         Failure(["Todo not found."])
       );
     });

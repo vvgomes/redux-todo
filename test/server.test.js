@@ -1,7 +1,7 @@
-import request from "supertest";
-import sinon from "sinon";
 import createApp from "../lib/server";
 import { createTodoStore } from "../lib/todos";
+import request from "supertest";
+import sinon from "sinon";
 import { last } from "ramda";
 
 describe("Todo server", () => {

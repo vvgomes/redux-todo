@@ -1,5 +1,5 @@
 import defineValidator from "../lib/validator";
-import assert from "assert";
+import { expect } from "chai";
 import { stub, spy } from "sinon";
 import { always } from "ramda";
 import Validation from "data.validation";
@@ -26,18 +26,18 @@ describe("validator()", () => {
 
   it("dispatches successful result", () => {
     validator(addTodoAction, dispatch, getState);
-    assert(dispatch.calledWith(addTodoAction));
+    expect(dispatch.calledWith(addTodoAction)).ok;
   });
 
   it("do not dispatch result when validation fails", () => {
     validator(toggleTodoAction, dispatch, getState);
-    assert(!dispatch.called);
+    expect(dispatch.called).not.ok;
   });
 
   it("dispatches default result when validator is not found", () => {
     const actionWithNoValidator = { type: "someAction" };
     validator(actionWithNoValidator, dispatch, getState);
-    assert(dispatch.calledWith(actionWithNoValidator));
+    expect(dispatch.calledWith(actionWithNoValidator)).ok;
   });
 });
 
