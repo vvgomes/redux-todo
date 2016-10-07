@@ -1,0 +1,2 @@
+- Move all assertions to Chai.
+- Move defineValidator to Redux Definer.
