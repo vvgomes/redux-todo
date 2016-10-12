@@ -1,4 +1,4 @@
-import createServer from "./lib/server";
+import { createServer } from "./lib/server";
 
 const port = 3000;
 

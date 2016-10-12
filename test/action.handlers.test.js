@@ -28,7 +28,7 @@ describe("actionHandlers{}", () => {
       const action = { type: "addTodo", text: "take trash out" };
       const newState = addTodo(state, action, uuidGen, clock);
 
-      expect(newState).deep.equal({
+      expect(newState).deep.eq({
         todos: [
           {
             id: "8c046a2d-b057-4f97-ba50-d7cacd04637e",
@@ -58,7 +58,7 @@ describe("actionHandlers{}", () => {
       const action = { type: "toggleTodo", id: "b3eccb22-ea89-46d1-bf5c-25c24cf3f85e" };
       const newState = toggleTodo(state, action);
 
-      expect(newState).deep.equal({
+      expect(newState).deep.eq({
         todos: [
           {
             id: "8c046a2d-b057-4f97-ba50-d7cacd04637e",
@@ -80,7 +80,7 @@ describe("actionHandlers{}", () => {
       const action = { type: "toggleTodo", id: "8c046a2d-b057-4f97-ba50-d7cacd04637e" };
       const newState = toggleTodo(state, action);
 
-      expect(newState).deep.equal({
+      expect(newState).deep.eq({
         todos: [
           {
             id: "8c046a2d-b057-4f97-ba50-d7cacd04637e",
@@ -102,7 +102,7 @@ describe("actionHandlers{}", () => {
       const action = { type: "toggleTodo", id: "666" };
       const newState = toggleTodo(state, action);
 
-      expect(newState).deep.equal({
+      expect(newState).deep.eq({
         todos: [
           {
             id: "8c046a2d-b057-4f97-ba50-d7cacd04637e",

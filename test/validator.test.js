@@ -1,4 +1,4 @@
-import defineValidator from "../lib/validator";
+import { defineValidator } from "../lib/validator";
 import { expect } from "chai";
 import { stub, spy } from "sinon";
 import { always } from "ramda";

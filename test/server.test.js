@@ -1,4 +1,4 @@
-import createApp from "../lib/server";
+import { createServer } from "../lib/server";
 import { createTodoStore } from "../lib/todos";
 import request from "supertest";
 import sinon from "sinon";
@@ -21,7 +21,7 @@ describe("Todo server", () => {
       text: "wash dishes"
     });
 
-    app = createApp(store);
+    app = createServer(store);
   });
 
   describe("GET /state", () => {
