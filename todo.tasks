@@ -1,1 +1,4 @@
 ✓ Move all assertions to Chai.
+- Rename server to api.
+- Separate api and web express apps.
+- Parameterize web proxy.
