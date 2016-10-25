@@ -1,12 +1,13 @@
-import { createServer } from "../lib/server";
-import { createTodoStore } from "../lib/todos";
+import { createApi } from "../lib/api";
+import { createTodoStore } from "../lib/store";
+import express from "express";
 import request from "supertest";
 import sinon from "sinon";
 import { last } from "ramda";
 
-describe("Todo server", () => {
+describe("api", () => {
+  let api;
   let store;
-  let app;
   let lastTodo;
 
   beforeEach(() => {
@@ -21,14 +22,14 @@ describe("Todo server", () => {
       text: "wash dishes"
     });
 
-    app = createServer(store);
+    api = createApi(store);
   });
 
   describe("GET /state", () => {
     it("responds with the current state", (done) => {
-      request(app)
+      request(express().use(api))
         .get("/state")
-        .set("Accept", "application/json")
+        .set("Accept", "apilication/json")
         .expect("Content-Type", /json/)
         .expect(200, {
           todos: [{
@@ -43,10 +44,10 @@ describe("Todo server", () => {
 
   describe("POST /actions", () => {
     it("responds with the successful action", (done) => {
-      request(app)
+      request(express().use(api))
         .post("/actions")
         .send({ type: "toggleTodo", id: lastTodo.id })
-        .set("Accept", "application/json")
+        .set("Accept", "apilication/json")
         .expect("Content-Type", /json/)
         .expect(202, {
           type: "toggleTodo",
@@ -55,10 +56,10 @@ describe("Todo server", () => {
     });
 
     it("responds with bad request when action is not accepted", (done) => {
-      request(app)
+      request(express().use(api))
         .post("/actions")
         .send({ type: "toggleTodo", id: "gibberish" })
-        .set("Accept", "application/json")
+        .set("Accept", "apilication/json")
         .expect("Content-Type", /json/)
         .expect(400, [ "Todo not found." ], done);
     });

@@ -1,4 +1,4 @@
-import { defineValidator } from "../lib/validator";
+import { validator } from "../lib/validator";
 import { expect } from "chai";
 import { stub, spy } from "sinon";
 import { always } from "ramda";
@@ -12,12 +12,11 @@ describe("validator()", () => {
   const toggleTodoAction = { type: "toggleTodo" };
 
   const actionValidators = {
-    addTodo: stub().withArgs(0, addTodoAction).returns(Success(addTodoAction)),
-    toggleTodo: stub().withArgs(0, toggleTodoAction).returns(Failure([ "Error" ]))
+    addTodo: stub().withArgs({}, addTodoAction).returns(Success(addTodoAction)),
+    toggleTodo: stub().withArgs({}, toggleTodoAction).returns(Failure([ "Error" ]))
   };
 
-  const validator = defineValidator(actionValidators);
-  const getState = always(0);
+  const getState = always({});
   let dispatch;
 
   beforeEach(() => {
@@ -25,18 +24,19 @@ describe("validator()", () => {
   })
 
   it("dispatches successful result", () => {
-    validator(addTodoAction, dispatch, getState);
+    validator(addTodoAction, actionValidators)(dispatch, getState);
     expect(dispatch.calledWith(addTodoAction)).ok;
   });
 
-  it("do not dispatch result when validation fails", () => {
-    validator(toggleTodoAction, dispatch, getState);
+  it("does not dispatch result when validation fails", () => {
+    validator(toggleTodoAction, actionValidators)(dispatch, getState);
     expect(dispatch.called).not.ok;
   });
 
   it("dispatches default result when validator is not found", () => {
     const actionWithNoValidator = { type: "someAction" };
     validator(actionWithNoValidator, dispatch, getState);
+    validator(actionWithNoValidator, actionValidators)(dispatch, getState);
     expect(dispatch.calledWith(actionWithNoValidator)).ok;
   });
 });
