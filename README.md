@@ -15,7 +15,7 @@ This is a Javascript todo app developed with [Redux](http://redux.js.org/). It e
 Request:
 
 ```bash
-$ curl localhost:3000/actions -X POST \
+$ curl localhost:3000/api/actions -X POST \
   --data '{"type": "addTodo", "text": "wash dishes"}' \
   -H 'Content-Type:application/json'
 ```
@@ -34,7 +34,7 @@ Response:
 Request:
 
 ```bash
-$ curl localhost:3000/actions -X POST \
+$ curl localhost:3000/api/actions -X POST \
   --data '{"type": "toggleTodo", "id": "cf373798-efbc-4219-8fb3-e10d4c505a0b"}' \
   -H 'Content-Type:application/json'
 ```
@@ -53,7 +53,7 @@ Response:
 Request:
 
 ```bash
-$ curl localhost:3000/state 
+$ curl localhost:3000/api/state
 ```
 
 Response:
@@ -82,7 +82,7 @@ Additionally, we've also used the [data.validation](https://github.com/folktale/
 When something goes wrong after posting a new action, the API returns errors and do not cause a action to be dispatched.
 
 ```bash
-$ curl localhost:3000/actions -X POST \
+$ curl localhost:3000/api/actions -X POST \
   --data '{"type": "addTodo" }' \
   -H 'Content-Type:application/json'
 ```
@@ -92,6 +92,10 @@ $ curl localhost:3000/actions -X POST \
   "Todo must have a text description."
 ]
 ```
+
+## Client App
+
+You can serve the [React Redux Todo](https://github.com/vvgomes/react-redux-todo) app using [Webpack](https://webpack.github.io/) dev server. Just point to `localhost:3000/` and the server side will proxy requests to Webpack.
 
 ## License
 
