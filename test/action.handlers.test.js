@@ -25,7 +25,7 @@ describe("actionHandlers{}", () => {
     const clock = always("2016-09-08T01:49:00.490+0000");
 
     it("adds a new todo to the todo list", () => {
-      const action = { type: "addTodo", text: "take trash out" };
+      const action = { type: "addTodo", todo: { text: "take trash out" } };
       const newState = addTodo(state, action, uuidGen, clock);
 
       expect(newState).deep.eq({
@@ -55,7 +55,7 @@ describe("actionHandlers{}", () => {
 
   describe("toggleTodo()", () => {
     it("marks an uncompleted todo as completed", () => {
-      const action = { type: "toggleTodo", id: "b3eccb22-ea89-46d1-bf5c-25c24cf3f85e" };
+      const action = { type: "toggleTodo", todo: { id: "b3eccb22-ea89-46d1-bf5c-25c24cf3f85e" } };
       const newState = toggleTodo(state, action);
 
       expect(newState).deep.eq({
@@ -77,7 +77,7 @@ describe("actionHandlers{}", () => {
     });
 
     it("marks a completed todo back to uncompleted", () => {
-      const action = { type: "toggleTodo", id: "8c046a2d-b057-4f97-ba50-d7cacd04637e" };
+      const action = { type: "toggleTodo", todo: { id: "8c046a2d-b057-4f97-ba50-d7cacd04637e" } };
       const newState = toggleTodo(state, action);
 
       expect(newState).deep.eq({
@@ -99,7 +99,7 @@ describe("actionHandlers{}", () => {
     });
 
     it("does nothing when the todo cannot be found", () => {
-      const action = { type: "toggleTodo", id: "666" };
+      const action = { type: "toggleTodo", todo: { id: "666" } };
       const newState = toggleTodo(state, action);
 
       expect(newState).deep.eq({

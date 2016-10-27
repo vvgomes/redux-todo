@@ -19,19 +19,19 @@ describe("actionValidators{}", () => {
 
   describe("addTodo()", () => {
     it("results in success when there are no violations", () => {
-      const action = { type: "addTodo", text: "walk the dog" };
+      const action = { type: "addTodo", todo: { text: "walk the dog" } };
       const result = addTodo(state, action);
 
       expect(result).deep.eq(
         Success({
           type: "addTodo",
-          text: "walk the dog"
+          todo: { text: "walk the dog" }
         })
       );
     });
 
     it("fails when the todo does not have a text description", () => {
-      const action = { type: "addTodo" };
+      const action = { type: "addTodo", todo: {}};
       const result = addTodo(state, action);
 
       expect(result).deep.eq(
@@ -40,7 +40,7 @@ describe("actionValidators{}", () => {
     });
 
     it("fails when the todo text is empty", () => {
-      const action = { type: "addTodo", text: "" };
+      const action = { type: "addTodo", todo: { text: "" } };
       const result = addTodo(state, action);
 
       expect(result).deep.eq(
@@ -49,7 +49,7 @@ describe("actionValidators{}", () => {
     });
 
     it("fails when the todo is duplicated", () => {
-      const action = { type: "addTodo", text: "wash dishes" };
+      const action = { type: "addTodo", todo: { text: "wash dishes" } };
       const result = addTodo(state, action);
 
       expect(result).deep.eq(
@@ -60,19 +60,19 @@ describe("actionValidators{}", () => {
 
   describe("toggleTodo()", () => {
     it("results in success when there are no violations", () => {
-      const action = { type: "toggleTodo", id: "8c046a2d-b057-4f97-ba50-d7cacd04637e" };
+      const action = { type: "toggleTodo", todo: { id: "8c046a2d-b057-4f97-ba50-d7cacd04637e" } };
       const result = toggleTodo(state, action);
 
       expect(result).deep.eq(
         Success({
           type: "toggleTodo",
-          id: "8c046a2d-b057-4f97-ba50-d7cacd04637e"
+          todo: { id: "8c046a2d-b057-4f97-ba50-d7cacd04637e" }
         })
       );
     });
 
     it("fails when todo is cannot be found", () => {
-      const action = { type: "toggleTodo", id: "666" };
+      const action = { type: "toggleTodo", todo: { id: "666" } };
       const result = toggleTodo(state, action);
 
       expect(result).deep.eq(

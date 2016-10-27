@@ -19,7 +19,7 @@ describe("api", () => {
 
     store.dispatch({ 
       type: "addTodo",
-      text: "wash dishes"
+      todo: { text: "wash dishes" }
     });
 
     api = createApi(store);
@@ -44,26 +44,32 @@ describe("api", () => {
 
   describe("POST /actions", () => {
     it("responds with the successful action", (done) => {
+      const action = {
+        type: "toggleTodo",
+        todo: { id: lastTodo.id }
+      };
+
       request(express().use(api))
         .post("/actions")
-        .send({ type: "toggleTodo", id: lastTodo.id })
+        .send(action)
         .set("Accept", "apilication/json")
         .expect("Content-Type", /json/)
-        .expect(202, {
-          type: "toggleTodo",
-          id: lastTodo.id
-        }, done);
+        .expect(202, action, done);
     });
 
     it("responds with bad request when action is not accepted", (done) => {
+      const action = {
+        type: "toggleTodo",
+        todo: { id: "gibberish" }
+      };
+
       request(express().use(api))
         .post("/actions")
-        .send({ type: "toggleTodo", id: "gibberish" })
+        .send(action)
         .set("Accept", "apilication/json")
         .expect("Content-Type", /json/)
         .expect(400, [ "Todo not found." ], done);
     });
   });
 });
-
 
