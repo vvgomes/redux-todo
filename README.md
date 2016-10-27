@@ -16,7 +16,7 @@ Request:
 
 ```bash
 $ curl localhost:3000/api/actions -X POST \
-  --data '{"type": "addTodo", "text": "wash dishes"}' \
+  --data '{"type": "addTodo", "todo": {"text": "wash dishes"}}' \
   -H 'Content-Type:application/json'
 ```
 
@@ -25,7 +25,9 @@ Response:
 ```json
 {
   "type": "addTodo",
-  "text": "wash dishes"
+  "todo": {
+    "text": "wash dishes"
+  }
 }
 ```
 
@@ -35,7 +37,7 @@ Request:
 
 ```bash
 $ curl localhost:3000/api/actions -X POST \
-  --data '{"type": "toggleTodo", "id": "cf373798-efbc-4219-8fb3-e10d4c505a0b"}' \
+  --data '{"type": "toggleTodo", "todo": {"id": "cf373798-efbc-4219-8fb3-e10d4c505a0b"}}' \
   -H 'Content-Type:application/json'
 ```
 
@@ -44,7 +46,9 @@ Response:
 ```json
 {
   "type": "toggleTodo",
-  "id": "c5cdc877-19da-48eb-99f3-983cde01379f"
+  "todo": {
+    "id": "c5cdc877-19da-48eb-99f3-983cde01379f"
+  }
 }
 ```
 
@@ -83,7 +87,7 @@ When something goes wrong after posting a new action, the API returns errors and
 
 ```bash
 $ curl localhost:3000/api/actions -X POST \
-  --data '{"type": "addTodo" }' \
+  --data '{"type": "addTodo", "todo": {}}' \
   -H 'Content-Type:application/json'
 ```
 
