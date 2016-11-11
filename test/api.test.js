@@ -27,18 +27,20 @@ describe("api", () => {
 
   describe("GET /state", () => {
     it("responds with the current state", (done) => {
+      const body = {
+        todos: [{
+          id: lastTodo.id,
+          text: "wash dishes",
+          completed: false,
+          timestamp: lastTodo.timestamp
+        }]
+      };
+
       request(express().use(api))
         .get("/state")
         .set("Accept", "apilication/json")
         .expect("Content-Type", /json/)
-        .expect(200, {
-          todos: [{
-            id: lastTodo.id,
-            text: "wash dishes",
-            completed: false,
-            timestamp: lastTodo.timestamp
-          }]
-        }, done);
+        .expect(200, body, done);
     });
   });
 
@@ -63,12 +65,16 @@ describe("api", () => {
         todo: { id: "gibberish" }
       };
 
+      const body = {
+        errors: [ "Todo not found." ]
+      };
+
       request(express().use(api))
         .post("/actions")
         .send(action)
         .set("Accept", "apilication/json")
         .expect("Content-Type", /json/)
-        .expect(400, [ "Todo not found." ], done);
+        .expect(400, body, done);
     });
   });
 });
