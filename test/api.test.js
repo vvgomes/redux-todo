@@ -56,7 +56,7 @@ describe("api", () => {
         .send(action)
         .set("Accept", "apilication/json")
         .expect("Content-Type", /json/)
-        .expect(202, action, done);
+        .expect(202, { action }, done);
     });
 
     it("responds with bad request when action is not accepted", (done) => {
